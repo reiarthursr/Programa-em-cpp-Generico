@@ -10,20 +10,19 @@ int main()
 	string opcao;//Seleção da opção
 	getline(cin,opcao);//Opção em string nescessária neste programa para uma atualização futuras
 
-	int dano = 2;//Dano
+	int dano = 1;//Dano
 	int def = 0;//Defesa
 	int vidam = 15;//Vida maxima
 	int vida = 15;//Vida atual
 	int vidai;//Vida do inimigo
 	int gold = 10;//Gold (Dinheiro (Money))
-	int erroloja;//Números de erros cometidos na loja
+	int erroloja = 0;//Números de erros cometidos na loja
 
 	//Loja 1
 	while( 1 == 1 )
 	{
-		erroloja = 0;//Resetar os erros da loja
 		cout << "Ola. Sou o vendedor de itens. (Digite a opção desejada.)" << endl;
-		cout << "" << endl;
+		cout << "Gold: " << gold << " | Dano: " << dano << " | Def: " << def << endl;
 		cout << "(1) Espada de madeira(2 dano) - 10 Gold" << endl;
 		cout << "(2) Escudo de couro(1 def) - 10 Gold" << endl;
 		cout << "(s) Sair da loja" << endl;
@@ -72,6 +71,7 @@ int main()
 		else if ( opcao == "s" )
 		{
 			cout << "--------------------------------------------------" << endl;
+			erroloja = 0;
 			break;
 		}
 		else if ( erroloja > 2 )
@@ -114,7 +114,7 @@ int main()
 		cout << "--------------------------------------------------" << endl;
 		cin >> opcao;
 		//Causando danos
-		vida = vida - 2;
+		vida = vida -(2 - def);
 		vidai = vidai - dano;
 
 		//Tela de morte
