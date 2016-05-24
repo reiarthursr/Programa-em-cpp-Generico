@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+void batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome);
+
 int main()
 {
 	cout << "Bem-vindo(a) ao Super RPG Generico!" << endl;//Tela inicial
@@ -15,16 +17,22 @@ int main()
 	int def = 0;//Defesa
 	int vidam = 15;//Vida maxima
 	int vida = 15;//Vida atual
-	int vidai;//Vida do inimigo
+
 	int danoi;//Dano do inimigo
 	int defi;//Defesa do inimigo
+	int vidami;//Vida maxima do inimigo
+	int vidai;//Vida do inimigo
+
 	int gold = 10;//Gold (Dinheiro (Money))
 	int erroloja = 0;//Números de erros cometidos na loja
+
+	string inimigo_nome;//Nome do inimigo
+	string inimigo_l1;//Desenho do inimigo
 
 	//Loja 1
 	while( 1 == 1 )
 	{
-		cout << "Ola. Sou o vendedor de itens. (Digite a opção desejada.)" << endl;
+		cout << "Ola. Sou o vendedor de itens. \r\n(Digite a opcao desejada.)" << endl;
 		cout << "Gold: " << gold << " | Dano: " << dano << " | Def: " << def << endl;
 		cout << "(1) Espada de madeira(2 dano) - 10 Gold" << endl;
 		cout << "(2) Escudo de couro(1 def) - 10 Gold" << endl;
@@ -77,6 +85,30 @@ int main()
 			break;
 			system("cls");
 		}
+		else if (opcao == "roubar")
+		{
+			cout << "Voce tenta assaltar a loja do vendedor" << endl;
+			cout << "E ele reage" << endl;
+			cout << "" << endl;
+			system("pause");
+			system("cls");
+			inimigo_nome = "Vendedor de itens Generico";
+			vidai = 15;
+			vidami = 15;
+			danoi = 4;
+			defi = 2;
+
+			batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
+
+			cout << "Voce levou os melhores equipamentos da loja, se cura com uma pocao e leva todo Gold do Vendedor" << endl;
+			gold = gold + 25;
+			dano = 6;
+			def = 3;
+			vida = 15;
+			system("pause");
+			system("cls");
+			break;
+		}
 		else if ( erroloja > 2 )
 		{
 			cout << "O vendedor de itens achou que voce era um estrangeiro" << endl;
@@ -103,98 +135,58 @@ int main()
 	cout << "" << endl;
 	system("pause");
 	system("cls");
+	inimigo_nome = "Monstro 1: Slime Generico";
 	vidai = 5;
+	vidami = 5;
 	danoi = 2;
 	defi = 0;
 
-	while ( vidai > 0)
-	{
-		cout << "Monstro 1: Slime Generico" << endl;
-		cout << "--------------." << endl;
-		cout << "  ______      | Monstro " << endl;
-		cout << " / |  | \\     | Vida:  " << vidai << "/5" << endl;
-		cout << "|        |    | Voce " << endl;
-		cout << " \\______/     | Vida:  " << vida << "/" << vidam << endl;
-		cout << "--------------*" << endl;
-		cout << "(Pressione algum botão para atacar)" << endl;
-		system("pause");
-		system("cls");
-		//Causando danos
-		vida = vida -(danoi - def);
-		vidai = vidai -(dano - defi);
-
-		//Tela de morte
-		if (vida <= 0)
-		{
-			cout << "Voce morreu" << endl;
-			cout << "" << endl;
-			system("pause");
-			system("cls");
-			exit(0);//Sair do jogo
-		}
-	}
-
-	cout << "Voce derrotou o Slime Generico" << endl;
-	cout << "" << endl;
-	system("pause");
-	system("cls");
+	batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
 
 	//Monstro 2
 	cout << "Voce se depara com um Slime Generico" << endl;
 	cout << "" << endl;
 	system("pause");
 	system("cls");
+	inimigo_nome = "Monstro 2: Slime Generico";
 	vidai = 3;
+	vidami = 3;
 	danoi = 3;
 	defi = 0;
 
-	while (vidai > 0)
-	{
-		cout << "Monstro 2: Slime Generico" << endl;
-		cout << "--------------." << endl;
-		cout << "  ______      | Monstro " << endl;
-		cout << " / |  | \\     | Vida:  " << vidai << "/3" << endl;
-		cout << "|        |    | Voce " << endl;
-		cout << " \\______/     | Vida:  " << vida << "/" << vidam << endl;
-		cout << "--------------*" << endl;
-		cout << "(Pressione algum botão para atacar)" << endl;
-		system("pause");
-		system("cls");
-		//Causando danos
-		vida = vida - (danoi - def);
-		vidai = vidai - (dano - defi);
-
-		//Tela de morte
-		if (vida <= 0)
-		{
-			cout << "Voce morreu" << endl;
-			cout << "" << endl;
-			system("pause");
-			system("cls");
-			exit(0);//Sair do jogo
-		}
-	}
-
-	cout << "Voce derrotou o Slime Generico" << endl;
-	cout << "" << endl;
-	system("pause");
-	system("cls");
+	batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
 
 	//Monstro 3
 	cout << "Voce se depara com um Slime Generico" << endl;
 	cout << "" << endl;
 	system("pause");
 	system("cls");
+	inimigo_nome = "Monstro 3: Slime Generico";
 	vidai = 8;
+	vidami = 8;
 	danoi = 1;
 	defi = 0;
 
+	batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
+
+	cout << "Voce acaba de sair da planicie dos slimes (+20 Gold)" << endl;
+	gold = gold + 20;//Recebendo Gold
+	cout << "E encontra uma loja no caminho" << endl;
+	cout << "" << endl;
+	system("pause");
+	system("cls");
+	
+	return 0;
+}
+
+void batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome)
+{
 	while (vidai > 0)
 	{
-		cout << "Monstro 3: Slime Generico" << endl;
+		cout << inimigo_nome << endl;
 		cout << "--------------." << endl;
-		cout << "  ______      | Monstro " << endl;
-		cout << " / |  | \\     | Vida:  " << vidai << "/8" << endl;
+		cout << "  ______      | Inimigo " << endl;
+		cout << " / |  | \\     | Vida:  " << vidai << "/" << vidami << endl;
 		cout << "|        |    | Voce " << endl;
 		cout << " \\______/     | Vida:  " << vida << "/" << vidam << endl;
 		cout << "--------------*" << endl;
@@ -216,16 +208,8 @@ int main()
 		}
 	}
 
-	cout << "Voce derrotou o Slime Generico" << endl;
+	cout << "Voce derrotou " << inimigo_nome << endl;
 	cout << "" << endl;
 	system("pause");
 	system("cls");
-
-	cout << "Voce acaba de sair da planicie dos slimes" << endl;
-	cout << "E encontra uma loja no caminho" << endl;
-	cout << "" << endl;
-	system("pause");
-	system("cls");
-	
-	return 0;
 }
