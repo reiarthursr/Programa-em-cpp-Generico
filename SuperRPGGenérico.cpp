@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-void batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome);
+int batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome, string inimigo_l1, string inimigo_l2, string inimigo_l3, string inimigo_l4);
 
 int main()
 {
@@ -27,7 +27,11 @@ int main()
 	int erroloja = 0;//Números de erros cometidos na loja
 
 	string inimigo_nome;//Nome do inimigo
-	string inimigo_l1;//Desenho do inimigo
+	//Desenho do inimigo
+	string inimigo_l1;
+	string inimigo_l2;
+	string inimigo_l3;
+	string inimigo_l4;
 
 	//Loja 1
 	while( 1 == 1 )
@@ -97,14 +101,20 @@ int main()
 			vidami = 15;
 			danoi = 4;
 			defi = 2;
+			//Desenho
+			inimigo_l1 = "";
+			inimigo_l2 = "";
+			inimigo_l3 = "";
+			inimigo_l4 = "";
 
-			batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
+			//Batalha
+			vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
 
 			cout << "Voce levou os melhores equipamentos da loja, se cura com uma pocao e leva todo Gold do Vendedor" << endl;
 			gold = gold + 25;
 			dano = 6;
 			def = 3;
-			vida = 15;
+			vida = vidam;
 			system("pause");
 			system("cls");
 			break;
@@ -140,8 +150,14 @@ int main()
 	vidami = 5;
 	danoi = 2;
 	defi = 0;
+	//Desenho
+	inimigo_l1 = "  ______     ";
+	inimigo_l2 = " / |  | \\    ";
+	inimigo_l3 = "|        |   ";
+	inimigo_l4 = " \\______/    ";
 
-	batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
+	//Batalha
+	vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
 
 	//Monstro 2
 	cout << "Voce se depara com um Slime Generico" << endl;
@@ -153,8 +169,14 @@ int main()
 	vidami = 3;
 	danoi = 3;
 	defi = 0;
+	//Desenho
+	inimigo_l1 = "  ______     ";
+	inimigo_l2 = " / |  | \\    ";
+	inimigo_l3 = "|        |   ";
+	inimigo_l4 = " \\______/    ";
 
-	batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
+	//Batalha
+	vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
 
 	//Monstro 3
 	cout << "Voce se depara com um Slime Generico" << endl;
@@ -166,8 +188,14 @@ int main()
 	vidami = 8;
 	danoi = 1;
 	defi = 0;
+	//Desenho
+	inimigo_l1 = "  ______     ";
+	inimigo_l2 = " / |  | \\    ";
+	inimigo_l3 = "|        |   ";
+	inimigo_l4 = " \\______/    ";
 
-	batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome);//Batalha
+	//Batalha
+	vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
 
 	cout << "Voce acaba de sair da planicie dos slimes (+20 Gold)" << endl;
 	gold = gold + 20;//Recebendo Gold
@@ -179,23 +207,28 @@ int main()
 	return 0;
 }
 
-void batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome)
+int batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome, string inimigo_l1, string inimigo_l2, string inimigo_l3, string inimigo_l4)
 {
 	while (vidai > 0)
 	{
 		cout << inimigo_nome << endl;
 		cout << "--------------." << endl;
-		cout << "  ______      | Inimigo " << endl;
-		cout << " / |  | \\     | Vida:  " << vidai << "/" << vidami << endl;
-		cout << "|        |    | Voce " << endl;
-		cout << " \\______/     | Vida:  " << vida << "/" << vidam << endl;
+		cout << inimigo_l1 << " | Inimigo " << endl;
+		cout << inimigo_l2 << " | Vida:  " << vidai << "/" << vidami << endl;
+		cout << inimigo_l3 << " | Voce " << endl;
+		cout << inimigo_l4 << " | Vida:  " << vida << "/" << vidam << endl;
 		cout << "--------------*" << endl;
 		cout << "(Pressione algum botão para atacar)" << endl;
 		system("pause");
 		system("cls");
 		//Causando danos
-		vida = vida - (danoi - def);
-		vidai = vidai - (dano - defi);
+		int danoc;//Dano causado
+		danoc = danoi - def;//Inimigo atacando
+		if (danoc < 0) danoc = 0;
+		vida = vida - danoc;
+		danoc = dano - defi;//Voce atacando
+		if (danoc < 0) danoc = 0;
+		vidai = vidai - danoc;
 
 		//Tela de morte
 		if (vida <= 0)
@@ -212,4 +245,6 @@ void batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vi
 	cout << "" << endl;
 	system("pause");
 	system("cls");
+
+	return vida;//Retornando o valor da vida
 }
