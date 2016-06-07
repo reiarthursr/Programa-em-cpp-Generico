@@ -33,6 +33,20 @@ int main()
 	string inimigo_l3;
 	string inimigo_l4;
 
+	if (opcao == "super cheat generico")
+	{
+		cout << "Voce ativou o Super Cheat Generico!" << endl;
+		cout << "E ganhou:" << endl;
+		cout << "Espada Generica(4 dano)" << endl;
+		cout << "Escudo Generico(2 def)" << endl;
+		cout << "Sua vida passa do limite: 20/15" << endl;
+		dano = 4;
+		def = 2;
+		vida = 20;
+		system("pause");
+		system("cls");
+	}
+
 	//Loja 1
 	while( 1 == 1 )
 	{
