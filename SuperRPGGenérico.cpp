@@ -2,7 +2,25 @@
 #include <string>
 using namespace std;
 
-int batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome, string inimigo_l1, string inimigo_l2, string inimigo_l3, string inimigo_l4);
+//Variaveis globais:
+int dano = 1;//Dano
+int def = 0;//Defesa
+int vidam = 15;//Vida maxima
+int vida = 15;//Vida atual
+
+int danoi;//Dano do inimigo
+int defi;//Defesa do inimigo
+int vidami;//Vida maxima do inimigo
+int vidai;//Vida do inimigo
+
+string inimigo_nome;//Nome do inimigo
+string inimigo_l1;//Desenho do inimigo
+string inimigo_l2;
+string inimigo_l3;
+string inimigo_l4;
+
+//Funções:
+void batalha();//Tela de batalha
 
 int main()
 {
@@ -10,28 +28,13 @@ int main()
 	cout << "" << endl;
 	cout << "(Enter para continuar)" << endl;
 	string opcao;//Seleção da opção
-	getline(cin,opcao);//Opção em string nescessária neste programa para uma atualização futuras
+	getline(cin,opcao);
 	system("cls");//Limpando a tela
 
-	int dano = 1;//Dano
-	int def = 0;//Defesa
-	int vidam = 15;//Vida maxima
-	int vida = 15;//Vida atual
-
-	int danoi;//Dano do inimigo
-	int defi;//Defesa do inimigo
-	int vidami;//Vida maxima do inimigo
-	int vidai;//Vida do inimigo
+	
 
 	int gold = 10;//Gold (Dinheiro (Money))
 	int erroloja = 0;//Números de erros cometidos na loja
-
-	string inimigo_nome;//Nome do inimigo
-	//Desenho do inimigo
-	string inimigo_l1;
-	string inimigo_l2;
-	string inimigo_l3;
-	string inimigo_l4;
 
 	if (opcao == "super cheat generico")
 	{
@@ -121,8 +124,7 @@ int main()
 			inimigo_l3 = "";
 			inimigo_l4 = "";
 
-			//Batalha
-			vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
+			batalha();//Batalha
 
 			cout << "Voce levou os melhores equipamentos da loja, se cura com uma pocao e leva todo Gold do Vendedor" << endl;
 			gold = gold + 25;
@@ -170,8 +172,7 @@ int main()
 	inimigo_l3 = "|        |   ";
 	inimigo_l4 = " \\______/    ";
 
-	//Batalha
-	vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
+	batalha();//Batalha
 
 	//Monstro 2
 	cout << "Voce se depara com um Slime Generico" << endl;
@@ -189,8 +190,7 @@ int main()
 	inimigo_l3 = "|        |   ";
 	inimigo_l4 = " \\______/    ";
 
-	//Batalha
-	vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
+	batalha();//Batalha
 
 	//Monstro 3
 	cout << "Voce se depara com um Slime Generico" << endl;
@@ -208,8 +208,7 @@ int main()
 	inimigo_l3 = "|        |   ";
 	inimigo_l4 = " \\______/    ";
 
-	//Batalha
-	vida = batalha(dano, def, vidam, vida, danoi, defi, vidami, vidai, inimigo_nome, inimigo_l1, inimigo_l2, inimigo_l3, inimigo_l4);//Definindo a vida depois da batalha
+	batalha();//Batalha
 
 	cout << "Voce acaba de sair da planicie dos slimes (+20 Gold)" << endl;
 	gold = gold + 20;//Recebendo Gold
@@ -221,7 +220,7 @@ int main()
 	return 0;
 }
 
-int batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vidami, int vidai, string inimigo_nome, string inimigo_l1, string inimigo_l2, string inimigo_l3, string inimigo_l4)
+void batalha()
 {
 	while (vidai > 0)
 	{
@@ -259,6 +258,4 @@ int batalha(int dano, int def, int vidam, int vida, int danoi, int defi, int vid
 	cout << "" << endl;
 	system("pause");
 	system("cls");
-
-	return vida;//Retornando o valor da vida
 }
