@@ -2,25 +2,35 @@
 #include <string>
 using namespace std;
 
-//Variaveis globais:
+//Variáveis globais:
+//Status do jogador
 int dano = 1;//Dano
 int def = 0;//Defesa
 int vidam = 15;//Vida maxima
 int vida = 15;//Vida atual
-
+//Status do inimigo
 int danoi;//Dano do inimigo
 int defi;//Defesa do inimigo
 int vidami;//Vida maxima do inimigo
 int vidai;//Vida do inimigo
 
 string inimigo_nome;//Nome do inimigo
-string inimigo_l1;//Desenho do inimigo
+//Desenho do inimigo
+string inimigo_l1;
 string inimigo_l2;
 string inimigo_l3;
 string inimigo_l4;
+//Inventário
+int slot_selecionado[4];
+int slot_mao1[3];
+int slot_mao2[3];
+int slot3[3];
+int status_item[3];//0 = dano; 1 = def; 2 = vida extra
+string nome_item;
 
 //Funções:
 void batalha();//Tela de batalha
+void itens();//Informações dos itens
 
 int main()
 {
@@ -220,6 +230,7 @@ int main()
 	return 0;
 }
 
+//Funções
 void batalha()
 {
 	while (vidai > 0)
@@ -258,4 +269,41 @@ void batalha()
 	cout << "" << endl;
 	system("pause");
 	system("cls");
+}
+
+void itens()
+{
+	/*
+	0 = Quantidade de itens no slot
+	1 = ID1 do item
+	2 = ID2 do item
+	3 = Slot selecionado
+	----
+	ID1:
+	0 = Nada
+	1 = Equipavel
+	2 = Comestivel
+	*/
+	if (slot_selecionado[1] == 1)
+	{
+		/*
+		ID2:
+		0 = Espada de Madeira
+		1 = Escudo de couro
+		*/
+		if (slot_selecionado[2] == 0)
+		{
+			nome_item = "Espada de Madeira";
+			status_item[0] = 2;
+			status_item[1] = 0;
+			status_item[2] = 0;
+		}
+		else if (slot_selecionado[2] == 1)
+		{
+			nome_item = "Escudo de Couro";
+			status_item[0] = 0;
+			status_item[1] = 1;
+			status_item[2] = 0;
+		}
+	}
 }
