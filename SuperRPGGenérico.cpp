@@ -2,6 +2,28 @@
 #include <string>
 using namespace std;
 
+//Constantes
+//Slots
+#define SLOT_SELECIONADO 0
+#define MAO1 1
+#define MAO2 2
+//Dados dos slots
+#define QUANT_ITEM 0
+#define ID1 1
+#define ID2 2
+#define SLOT 3
+//ID1
+#define EQUIPAVEL 1
+#define COMESTIVEL 2
+//ID2
+#define ESPADA_DE_MADEIRA 0
+#define ESCUDO_DE_COURO 1
+//Status do item
+#define DANO 0
+#define DEF 1
+#define VIDA_EX 2
+#define CURA 3
+
 //Variáveis globais:
 //Status do jogador
 int dano = 1;//Dano
@@ -21,11 +43,12 @@ string inimigo_l2;
 string inimigo_l3;
 string inimigo_l4;
 //Inventário
+int inventario[5][4];
 int slot_selecionado[4];
 int slot_mao1[3];
 int slot_mao2[3];
 int slot3[3];
-int status_item[3];//0 = dano; 1 = def; 2 = vida extra
+int status_item[4];
 string nome_item;
 
 //Funções:
@@ -273,37 +296,74 @@ void batalha()
 
 void itens()
 {
-	/*
-	0 = Quantidade de itens no slot
-	1 = ID1 do item
-	2 = ID2 do item
-	3 = Slot selecionado
-	----
-	ID1:
-	0 = Nada
-	1 = Equipavel
-	2 = Comestivel
-	*/
-	if (slot_selecionado[1] == 1)
+	if (slot_selecionado[ID1] == EQUIPAVEL)
 	{
-		/*
-		ID2:
-		0 = Espada de Madeira
-		1 = Escudo de couro
-		*/
-		if (slot_selecionado[2] == 0)
+		if (slot_selecionado[ID2] == ESPADA_DE_MADEIRA)
 		{
 			nome_item = "Espada de Madeira";
-			status_item[0] = 2;
-			status_item[1] = 0;
-			status_item[2] = 0;
+			status_item[DANO] = 2;
+			status_item[DEF] = 0;
+			status_item[VIDA_EX] = 0;
+			status_item[CURA] = 0;
 		}
-		else if (slot_selecionado[2] == 1)
+		else if (slot_selecionado[2] == ESCUDO_DE_COURO)
 		{
 			nome_item = "Escudo de Couro";
-			status_item[0] = 0;
-			status_item[1] = 1;
-			status_item[2] = 0;
+			status_item[DANO] = 0;
+			status_item[DEF] = 1;
+			status_item[VIDA_EX] = 0;
+			status_item[CURA] = 0;
 		}
 	}
+}
+
+void pegar_item()
+{
+	while (1)
+	{
+		cout << "Voce pegou o item: " << nome_item << endl;
+		cout << "dano: " << status_item[0] << endl;
+		cout << "def: " << status_item[1] << endl;
+		cout << "hp: " << status_item[2] << endl;
+		cout << "cura: " << status_item[3] << endl << endl;
+
+		cout << "Onde deseja colocar o item?" << endl;
+		cout << "(0) No chao" << endl;
+		cout << "(3 - 5) Guardar no slot selecionado" << endl;
+		cin >> inventario[SLOT_SELECIONADO][SLOT];
+		
+			if (inventario[SLOT_SELECIONADO][SLOT] == 0)
+			{
+				cout << "Voce jogou o item fora" << endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+			else if ((inventario[SLOT_SELECIONADO][SLOT] >= 3) && (inventario[SLOT_SELECIONADO][SLOT] <= 5))
+			{
+				if (inventario[inventario[SLOT_SELECIONADO][SLOT]][QUANT_ITEM] > 0)
+				{
+					cout << "Esta slot esta ocupado" << endl;
+					system("pause");
+					system("cls");
+				}
+				else
+				{
+					inventario[inventario[SLOT_SELECIONADO][SLOT]][QUANT_ITEM] = inventario[SLOT_SELECIONADO][QUANT_ITEM];
+					inventario[inventario[SLOT_SELECIONADO][SLOT]][QUANT_ITEM] = inventario[SLOT_SELECIONADO][ID1];
+					inventario[inventario[SLOT_SELECIONADO][SLOT]][QUANT_ITEM] = inventario[SLOT_SELECIONADO][ID2];
+				}
+			}
+			else
+			{
+				cout << "Opcao invalida" << endl;
+				system("pause");
+				system("cls");
+			}
+	}
+	//Esvaziando SLOT_SELECIONADO
+	inventario[SLOT_SELECIONADO][QUANT_ITEM] = 0;
+	inventario[SLOT_SELECIONADO][ID1] = 0;
+	inventario[SLOT_SELECIONADO][ID2] = 0;
+	inventario[SLOT_SELECIONADO][SLOT] = 0;
 }
